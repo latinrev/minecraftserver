@@ -36,6 +36,10 @@ const express = require("express");
 app.use(express.json({}));
 const MSM = new MinecraftServerManager(dbx, ngrok);
 let CM;
+const fs = require("fs");
+if (!fs.existsSync(path.join(__dirname, "server_data"))) {
+	fs.mkdirSync(path.join(__dirname, "server_data"));
+}
 
 app.get("/startserver", async (req, res) => {
 	const { link: minecraftJarLink } = req.query;
