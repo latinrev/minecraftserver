@@ -31,7 +31,7 @@ const MinecraftServerManager = require("./MinecraftServerManager");
 
 //Instances
 const state = State();
-const app = new Eonil({ directory: "./public" }).StartServer().GetApp();
+const app = new Eonil({ port: process.env.PORT, directory: "./public" }).StartServer().GetApp();
 const express = require("express");
 app.use(express.json({}));
 const MSM = new MinecraftServerManager(dbx, ngrok);
