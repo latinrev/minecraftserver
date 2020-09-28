@@ -1,0 +1,21 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+label{
+    width: 20vw;
+    display: block;
+}
+.server-properties-container{
+    width: 100vw;
+    padding: 50px;
+    display: grid;
+    grid-template-columns: 0.2fr 0.5fr;
+    grid-template-rows: auto;
+    .server-properties{
+        padding: 10px;
+        width: 50%;
+        }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>SERVER</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<h1 class="server-status">SERVER STATUS:</h1>
+		<h1 class="server-ip">SERVER IP</h1>
+
+		<input type="file" name="" id="" /> JAR FILE
+		<label for="version">Version</label>
+		<select name="version" id="version" class="version">
+			<option
+				data-url="https://launcher.mojang.com/v1/objects/bb2b6b1aefcd70dfd1892149ac3a215f6c636b07/server.jar"
+			>
+				1.15.2
+			</option>
+			<option
+				data-url="https://launcher.mojang.com/v1/objects/03b8fa357937d0bdb6650ec8cc74506ec2fd91a7/server.jar"
+			>
+				Snapshot 20w21a
+			</option>
+		</select>
+		<section class="commands">
+			<h2 class="start-server" style="cursor: pointer">Start Server</h2>
+			<h2 class="stop-server" style="cursor: pointer">Stop Server</h2>
+			<h2 class="backup-server" style="cursor: pointer">Backup Server</h2>
+			<h2 class="save-server" style="cursor: pointer">Save Server</h2>
+			<input type="text" class="make-op" placeholder="Player Username" />
+			<button class="make-op-button">MAKE PLAYER OP</button>
+			<input type="text" class="command" placeholder="Issue a command" />
+			<button class="command-button">Send command</button>
+			<button class="properties-server">Guardar</button>
+		</section>
+
+		<div class="server-properties-container">
+			<label for="MOTD">MOTD</label>
+			<input type="text" class="server-properties" id="MOTD" name="MOTD" />
+			<label for="Max">Max Players</label>
+			<input type="number" class="server-properties" id="Max" name="Max" placeholder="Max Players" />
+			<label for="difficulty">Difficulty</label>
+			<select class="server-properties" name="difficulty" id="difficulty">
+				<option value="peaceful">Peaceful</option>
+				<option value="easy">Easy</option>
+				<option value="normal">Normal</option>
+				<option value="hard">Hard</option>
+			</select>
+			<label for="view-distance">View distance</label>
+
+			<input
+				type="number"
+				class="server-properties"
+				min="3"
+				max="15"
+				id="view-distance"
+				name="view-distance"
+				placeholder="Max view distance"
+			/>
+		</div>
+		<script src="./app.js"></script>
+	</body>
+</html>

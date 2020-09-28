@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+label {
+  width: 20vw;
+  display: block;
+}
+
+.server-properties-container {
+  width: 100vw;
+  padding: 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 0.2fr 0.5fr;
+      grid-template-columns: 0.2fr 0.5fr;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+}
+
+.server-properties-container .server-properties {
+  padding: 10px;
+  width: 50%;
+}
+/*# sourceMappingURL=style.css.map */
