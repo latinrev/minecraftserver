@@ -8,9 +8,6 @@ if (!fs.existsSync(path.join(__dirname, "server_data"))) {
 	fs.mkdirSync(path.join(__dirname, "server_data"));
 }
 
-const tc = (promise) => {
-	return promise.then((data) => [data, undefined]).catch((error) => Promise.resolve([undefined, error]));
-};
 WriteServerProperties = (binary) => {
 	return new Promise(async (resolve, reject) => {
 		fs.writeFile(path.join(__dirname, "server_data", "server.properties"), binary, () => resolve());
@@ -58,14 +55,11 @@ class ServerManager {
 			console.log("Beginning server backup");
 			var zip = new Zip();
 			zip.addLocalFolder(path.join(__dirname, "server_data"));
-			const [suc, err] = await tc(
-				this.dbx.filesUpload({
-					path: "/world.zip",
-					contents: zip.toBuffer(),
-					mode: { ".tag": "overwrite" },
-				})
-			);
-			if (err) reject("Couldn't backup Minecraft World / Server " + err.response);
+			this.dbx.filesUpload({
+				path: "/world.zip",
+				contents: zip.toBuffer(),
+				mode: { ".tag": "overwrite" },
+			});
 			resolve("Backup Complete");
 		});
 	};
@@ -92,8 +86,7 @@ class ServerManager {
 	};
 	DownloadMinecraftJar = (linkToVersion) => {
 		return new Promise(async (resolve, reject) => {
-			const [jarFile, err] = tc(await axios.get(linkToVersion, { responseType: "stream" }));
-			if (err) reject("Couldn't Download minecraft Jar");
+			const jarFile = await axios.get(linkToVersion, { responseType: "stream" });
 			jarFile.data
 				.pipe(fs.createWriteStream("mcserver.jar"))
 				.on("finish", () => resolve())
@@ -102,8 +95,7 @@ class ServerManager {
 	};
 	DownloadServerMinecraftWorld = () => {
 		return new Promise(async (resolve, reject) => {
-			const [worldFile, err] = await tc(this.dbx.filesDownload({ path: "/world.zip" }));
-			if (err) reject("Couldn't Download Minecraft World " + err.response);
+			const worldFile = await this.dbx.filesDownload({ path: "/world.zip" });
 			var zip = new Zip(worldFile.fileBinary);
 			console.log("Extracting world");
 			zip.extractAllToAsync(path.join(__dirname, "server_data"), true, (err) => {
@@ -114,8 +106,7 @@ class ServerManager {
 	};
 	DownloadServerProperties = () => {
 		return new Promise(async (resolve, reject) => {
-			const [serverPropertiesFile, err] = await tc(this.dbx.filesDownload({ path: "/server.properties" }));
-			if (err) reject("Couldn't Download Properties " + err.response);
+			const serverPropertiesFile = await this.dbx.filesDownload({ path: "/server.properties" });
 			WriteServerProperties(serverPropertiesFile.fileBinary);
 			fs.readFile(path.join(__dirname, "server_data", "server.properties"), "utf8", (err, data) => {
 				const properties = JSON.stringify(
