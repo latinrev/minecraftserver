@@ -22,20 +22,20 @@ $ npm install
 
 There is an example.env(Rename this to .env ) file in the repo telling you where to put your tokens
 
-### NGROK
+#### NGROK
   Create an account in ngrok, retrieve your access token and paste it in your .env file
-### DROPBOX  
+#### DROPBOX  
   Create an account in dropbox, create a new application of type folder and retrieve your folder access token and paste it in your .env file
 
 
 ## Heroku Config
-### HEROKU
+#### HEROKU
   Create an application and follow the instructions to push the repository
-### NGROK
+#### NGROK
   Create an account in ngrok, retrieve your access token and paste it under the name NGROK_TOKEN in your Enviroment variables in heroku's dashboard
-### DROPBOX  
+#### DROPBOX  
   Create an account in dropbox, create a new application of type folder and retrieve your folder access token and paste it under the name DROPBOX_TOKEN in your Enviroment variables in heroku's dashboard
-### KEEP-ALIVE URL
+#### KEEP-ALIVE URL
   Paste https:// "YOUR HEROKU APP NAME" .herokuapp.com/ under the name BACKUP_URL in your Enviroment variables in heroku's dashboard
   
 # Usage
@@ -45,7 +45,8 @@ There is an example.env(Rename this to .env ) file in the repo telling you where
 ```
 $ npm start
 ```
-And then navigate to localhost:5000 to start the server
+    Navigate to localhost:5000 to start the server
 ## Heroku 
-  Heroku will automatically detect the procfile and start the webpage, if that doesn't work go into the dashboard/resources and scalate the dyno to be on
-  To start the server then just go to https:// "YOUR HEROKU APP NAME" .herokuapp.com/
+  Heroku will automatically detect the procfile and start the webpage, if that doesn't work go into the dashboard/resources and scalate the dyno to be on.
+  
+    To start the server go to https:// "YOUR HEROKU APP NAME" .herokuapp.com/
