@@ -1,6 +1,7 @@
 /node_modules
 *.jar
 serverbackup.js
+/server_data
 serverBackupReccnt.js
 .env# Logs
 logs

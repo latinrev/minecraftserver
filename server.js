@@ -14,15 +14,7 @@ const ngrok = new Ngrok("tcp", process.env.NGROK_TOKEN, "25565");
 const Cron = require("cron").CronJob;
 const axios = require("axios");
 //Initialize Cronjob
-var keepAlive = new Cron({
-	cronTime: "*/5 * * * *",
-	onTick: async () => {
-		await BackupServer();
-		await axios.get("https://mcserverdmj.herokuapp.com/");
-		console.log("Pinging each 5 minutes");
-	},
-	start: false,
-});
+
 //Managers
 const { State, STATES } = require("./ServerStateManager");
 const CommandManager = require("./CommandManager");
@@ -36,6 +28,15 @@ const express = require("express");
 app.use(express.json({}));
 const MSM = new MinecraftServerManager(dbx, ngrok);
 let CM;
+var keepAlive = new Cron({
+	cronTime: "*/5 * * * *",
+	onTick: async () => {
+		await MSM.BackupServer();
+		await axios.get("https://mcserverdmj.herokuapp.com/");
+		console.log("Pinging each 5 minutes");
+	},
+	start: false,
+});
 
 app.get("/startserver", async (req, res) => {
 	const { link: minecraftJarLink } = req.query;
@@ -43,7 +44,7 @@ app.get("/startserver", async (req, res) => {
 		state.ChangeState(STATES.starting);
 		await MSM.DownloadMinecraftJar(minecraftJarLink);
 		console.log("Finished piping");
-		await MSM.DownloadMinecraftWorld();
+		await MSM.DownloadServerMinecraftWorld();
 		console.log("Finished downloading world");
 		CM = new CommandManager(await MSM.StartServer());
 		console.log("Starting server");
