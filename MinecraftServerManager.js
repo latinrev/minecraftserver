@@ -36,16 +36,6 @@ ExecuteServerJar = async () => {
 		});
 	});
 };
-DownloadMinecraftJar = (linkToVersion) => {
-	return new Promise(async (resolve, reject) => {
-		const [jarFile, err] = tc(await axios.get(linkToVersion, { responseType: "stream" }));
-		if (err) reject("Couldn't Download minecraft Jar");
-		jarFile.data
-			.pipe(fs.createWriteStream("mcserver.jar"))
-			.on("finish", () => resolve())
-			.on("error", () => reject());
-	});
-};
 
 class ServerManager {
 	constructor(dbx, ngrok) {
@@ -98,6 +88,16 @@ class ServerManager {
 					resolve();
 				}
 			);
+		});
+	};
+	DownloadMinecraftJar = (linkToVersion) => {
+		return new Promise(async (resolve, reject) => {
+			const [jarFile, err] = tc(await axios.get(linkToVersion, { responseType: "stream" }));
+			if (err) reject("Couldn't Download minecraft Jar");
+			jarFile.data
+				.pipe(fs.createWriteStream("mcserver.jar"))
+				.on("finish", () => resolve())
+				.on("error", () => reject());
 		});
 	};
 	DownloadServerMinecraftWorld = () => {
