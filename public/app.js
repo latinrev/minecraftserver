@@ -1,13 +1,11 @@
-const baseUrl = "http://localhost:5000";
-
 q(".start-server").addEventListener("click", () =>
-	fetch(baseUrl + `/startserver?link=${q("#version").selectedOptions[0].getAttribute("data-url")}`)
+	fetch(`/startserver?link=${q("#version").selectedOptions[0].getAttribute("data-url")}`)
 );
-q(".stop-server").addEventListener("click", () => fetch(baseUrl + `/stopserver`));
-q(".make-op-button").addEventListener("click", () => fetch(baseUrl + `/command?name=${q(".make-op").value}`));
-q(".save-server").addEventListener("click", () => fetch(baseUrl + `/saveserver`));
-q(".backup-server").addEventListener("click", () => fetch(baseUrl + `/backupserver`));
-q(".command-button").addEventListener("click", () => fetch(baseUrl + `/command?command=${q(".command").value}`));
+q(".stop-server").addEventListener("click", () => fetch(`/stopserver`));
+q(".make-op-button").addEventListener("click", () => fetch(`/command?name=${q(".make-op").value}`));
+q(".save-server").addEventListener("click", () => fetch(`/saveserver`));
+q(".backup-server").addEventListener("click", () => fetch(`/backupserver`));
+q(".command-button").addEventListener("click", () => fetch(`/command?command=${q(".command").value}`));
 const serverProperties = [
 	"PVP",
 	"SPAWN-NPC",
@@ -32,7 +30,7 @@ q(".properties-server").addEventListener("click", () => {
 		{ name: "enable-command-block", value: q("#COMMAND-BLOCKS").value },
 		{ name: "broadcast-console-to-ops", value: q("#BROADCAST-CONSOLE-TO-OPS").value },
 	]);
-	fetch(baseUrl + "/uploadproperties", {
+	fetch("/uploadproperties", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
