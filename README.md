@@ -36,7 +36,7 @@ There is an example.env(Rename this to .env ) file in the repo telling you where
 ### DROPBOX  
   Create an account in dropbox, create a new application of type folder and retrieve your folder access token and paste it under the name DROPBOX_TOKEN in your Enviroment variables in heroku's dashboard
 ### KEEP-ALIVE URL
-  Paste it under the name BACKUP_URL in your Enviroment variables in heroku's dashboard
+  Paste https:// "YOUR HEROKU APP NAME" .herokuapp.com/ under the name BACKUP_URL in your Enviroment variables in heroku's dashboard
   
 # Usage
 
