@@ -4,6 +4,9 @@ const Zip = require("adm-zip");
 const path = require("path");
 const { exec } = require("child_process");
 var url;
+if (!fs.existsSync(path.join(__dirname, "server_data"))) {
+	fs.mkdirSync(path.join(__dirname, "server_data"));
+}
 
 const tc = (promise) => {
 	return promise.then((data) => [data, undefined]).catch((error) => Promise.resolve([undefined, error]));
